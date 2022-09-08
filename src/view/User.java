@@ -1,6 +1,7 @@
 package view;
 
 import model.user.Register;
+import storage.user.IReadRegisterFile;
 import storage.user.RegisterFile;
 
 import java.util.InputMismatchException;
@@ -11,7 +12,7 @@ public class User {
     public void loginSystem() {
         try {
             menuUser();
-        } catch (InputMismatchException e) {
+        } catch (Exception e) {
             System.out.println("Bạn đã nhập sai dữ liệu, vui lòng nhập lại");
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
@@ -47,12 +48,12 @@ public class User {
     public static List<Register> registerList;
 
     static {
-        registerList = RegisterFile.readFile();
+        registerList = RegisterFile.getInstance().readData();
     }
 
     public void addRegister(Register register) {
         registerList.add(register);
-        RegisterFile.writeFile(registerList);
+        RegisterFile.getInstance().writeData(registerList);
     }
     private void addToRegister(List<Register> registerList) {
         Scanner scanner = new Scanner(System.in);
@@ -62,6 +63,9 @@ public class User {
         System.out.println("Tên đăng nhập");
         Scanner scanner1 = new Scanner(System.in);
         String name = scanner1.nextLine();
+        System.out.println("Nhập mật khẩu đăng nhập của bạn");
+        Scanner scanner5 = new Scanner(System.in);
+        String password = scanner5.nextLine();
         System.out.println("Nhập email");
         Scanner scanner2 = new Scanner(System.in);
         String email = scanner2.nextLine();
@@ -71,14 +75,11 @@ public class User {
         System.out.println("Nhập địa chỉ của bạn");
         Scanner scanner4 = new Scanner(System.in);
         String address = scanner4.nextLine();
-        System.out.println("Nhập mật khẩu đăng nhập của bạn");
-        Scanner scanner5 = new Scanner(System.in);
-        String password = scanner5.nextLine();
 
-        Register register= new Register(id, name, email, phone, address, password);
+
+        Register register= new Register(id, name, password, email, phone, address );
         registerList.add(register);
-        RegisterFile.writeFile(registerList);
-
+        RegisterFile.getInstance().writeData(registerList);
     }
 
 //    private void checkUser(int id, String name, String email, String phone, String address, String password) {
@@ -109,6 +110,17 @@ public class User {
 //    }
 
     private void login() {
-
+        System.out.println("Nhập tên Đăng nhập");
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        System.out.println("Nhập password");
+        Scanner scanner1 = new Scanner(System.in);
+        String password = scanner1.nextLine();
+        checkAccount(name, password);
     }
+
+    private void checkAccount(String name, String password) {
+    }
+
+
 }

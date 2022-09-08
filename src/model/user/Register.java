@@ -2,40 +2,22 @@ package model.user;
 
 import java.io.Serializable;
 
-public class Register implements Serializable {
-    private int id;
-    private String name;
+public class Register extends User implements Serializable {
     private String email;
     private String phone;
     private String address;
-    private String password;
 
-    public Register() {
-    }
-
-    public Register(int id, String name, String email, String phone, String address, String password) {
-        this.id = id;
-        this.name = name;
+    public Register(String email, String phone, String address) {
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Register(int id, String name, String password, String email, String phone, String address) {
+        super(id, name, password);
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
     }
 
     public String getEmail() {
@@ -62,16 +44,12 @@ public class Register implements Serializable {
         this.address = address;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
-        return "Register{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", phone='" + phone + '\'' + ", address='" + address + '\'' + ", password='" + password + '\'' + '}';
+        return "Register{" +
+                "email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

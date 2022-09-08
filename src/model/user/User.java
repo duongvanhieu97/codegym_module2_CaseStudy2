@@ -3,25 +3,34 @@ package model.user;
 import java.io.Serializable;
 
 
-public class User extends Register implements Serializable {
-    private String user;
+public class User implements Serializable {
+    private int id;
+    private String name;
     private String password;
 
     public User() {
-
     }
 
-    public User(String user, String password) {
-        this.user = user;
+    public User(int id, String name, String password) {
+        this.id = id;
+        this.name = name;
         this.password = password;
     }
 
-    public String getUser() {
-        return user;
+    public int getId() {
+        return id;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -34,6 +43,11 @@ public class User extends Register implements Serializable {
 
     @Override
     public String toString() {
-        return "Account{" + "user='" + user + '\'' + ", password='" + password + '\'' + '}';
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
+

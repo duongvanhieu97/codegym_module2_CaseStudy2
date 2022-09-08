@@ -1,4 +1,4 @@
-package controller.user;
+package view;
 
 import model.user.Register;
 import storage.user.RegisterFile;
@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManageUser {
+public class User {
     public void loginSystem() {
         try {
             menuUser();

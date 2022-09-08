@@ -3,15 +3,15 @@ package model.user;
 import java.io.Serializable;
 
 
-public class Login implements Serializable {
+public class User extends Register implements Serializable {
     private String user;
     private String password;
 
-    public Login() {
+    public User() {
 
     }
 
-    public Login(String user, String password) {
+    public User(String user, String password) {
         this.user = user;
         this.password = password;
     }

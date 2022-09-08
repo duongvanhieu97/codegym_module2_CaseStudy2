@@ -1,10 +1,8 @@
 package view;
 
-import controller.user.ManageUser;
-
 public class Main {
     public static void main(String[] args) {
-        ManageUser user = new ManageUser();
+        User user = new User();
         user.loginSystem();
     }
 }

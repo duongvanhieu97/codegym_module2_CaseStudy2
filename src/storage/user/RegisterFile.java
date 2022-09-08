@@ -6,8 +6,21 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterFile {
-    public static List<Register> readFile() {
+public class RegisterFile implements IReadRegisterFile {
+    private static RegisterFile registerFile;
+    private RegisterFile() {
+
+    }
+    public static RegisterFile getInstance() {
+        if (registerFile == null) {
+            registerFile = new RegisterFile();
+        }
+        return registerFile;
+    }
+
+
+    @Override
+    public List<Register> readData() {
         List<Register> registerList = new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream("data/register.txt");
@@ -25,11 +38,12 @@ public class RegisterFile {
         return null;
     }
 
-    public static void writeFile(List<Register> registers) {
+    @Override
+    public void writeData(List<Register> list) {
         try {
             FileOutputStream fos = new FileOutputStream("data/register.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(registers);
+            oos.writeObject(list);
             oos.close();
             fos.close();
         } catch (IOException e) {
@@ -37,13 +51,34 @@ public class RegisterFile {
         }
     }
 
-    public static void main(String[] args) {
-        List<Register> registers = new ArrayList<>();
-        registers.add(new Register(1,"Hieu","abc@gmail.com","0923451124","HN","1"));
-        registers.add(new Register(2,"Vinh","abc@gmail.com","0923451124","HN","1"));
-        registers.add(new Register(3,"Tuan","abc@gmail.com","0923451124","HN","1"));
-        registers.add(new Register(4,"Han","abc@gmail.com","0923451124","HN","1"));
-        registers.add(new Register(5,"Trung","abc@gmail.com","0923451124","HN","1"));
-        writeFile(registers);
+    @Override
+    public List<Register> readData(String path) {
+        List<Register> list = new ArrayList<>();
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Object obj = ois.readObject();
+            list = (List<Register>) obj;
+            return list;
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    @Override
+    public void writeData(List<Register> list, String path) {
+        try {
+            FileOutputStream fos = new FileOutputStream(path);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

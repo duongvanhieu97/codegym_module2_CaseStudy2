@@ -4,6 +4,7 @@ import model.user.Register;
 import storage.user.IReadRegisterFile;
 import storage.user.RegisterFile;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 import static controller.user.ManageRegister.addUser;
 import static controller.user.ManageRegister.checkRegister;
 import static controller.user.ManageUser.checkLogin;
+import static controller.user.ManageUser.userList;
 
 public class User {
     public void loginSystem() {
@@ -25,6 +27,14 @@ public class User {
 
     }
 
+//    public static void main(String[] args) {
+//        List<Register> users ;
+//        users =  RegisterFile.getInstance().readData();
+//        for (Register register: users
+//             ) {
+//            System.out.println(register);
+//        }
+//    }
     //    menu User
     private void menuUser() {
         System.out.println("1: Đăng Nhập");
@@ -106,6 +116,8 @@ public class User {
             if (checkLogin(name, password)) {
                 System.out.println("Đăng nhập thành công");
 //                Hiện thị ra menu categories
+            }else {
+                System.out.println("Nhập sai");
             }
         }catch (IndexOutOfBoundsException e) {
             System.out.println("Đăng nhập thất bại");

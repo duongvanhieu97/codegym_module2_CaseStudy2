@@ -7,12 +7,6 @@ public class Register extends User implements Serializable {
     private String phone;
     private String address;
 
-    public Register(String email, String phone, String address) {
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-    }
-
     public Register(int id, String name, String password, String email, String phone, String address) {
         super(id, name, password);
         this.email = email;
@@ -47,6 +41,7 @@ public class Register extends User implements Serializable {
     @Override
     public String toString() {
         return "Register{" +
+                super.toString() +
                 "email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +

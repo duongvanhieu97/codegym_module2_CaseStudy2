@@ -1,11 +1,9 @@
 package view;
 
 import model.user.Register;
-import storage.user.IReadRegisterFile;
 import storage.user.RegisterFile;
+import view.Product;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +25,7 @@ public class User {
 
     }
 
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        List<Register> users ;
 //        users =  RegisterFile.getInstance().readData();
 //        for (Register register: users
@@ -86,7 +84,7 @@ public class User {
         Scanner scanner4 = new Scanner(System.in);
         String address = scanner4.nextLine();
 
-        CheckUser(id,name,password,email,phone,address);
+        CheckUser(id, name, password, email, phone, address);
     }
 
     private void CheckUser(int id, String name, String password, String email, String phone, String address) {
@@ -94,7 +92,7 @@ public class User {
             System.out.println("Tài khoản đã tồn tại");
         } else {
             System.out.println("Bạn đăng ký tài khoản thành công");
-            addUser(new Register(id,name,password,email,phone,address));
+            addUser(new Register(id, name, password, email, phone, address));
             System.out.println("Mời đang nhập hệ thống");
         }
         loginSystem();
@@ -112,20 +110,22 @@ public class User {
     }
 
     private void checkAccount(String name, String password) {
+
+        Product product = new Product();
         try {
             if (checkLogin(name, password)) {
                 System.out.println("Đăng nhập thành công");
-//                Hiện thị ra menu categories
-            }else {
+                //   Hiện thị ra menu categories
+
+                product.menuCategories();
+            } else {
                 System.out.println("Nhập sai");
             }
-        }catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Đăng nhập thất bại");
             loginSystem();
         }
     }
-
-
 
 
 }

@@ -2,7 +2,7 @@ package model.products;
 
 import java.io.Serializable;
 
-public class Laptop implements Serializable {
+public class Laptop implements Serializable,InterfaceProducts {
     private int id;
     private String name;
     private double price;
@@ -48,5 +48,13 @@ public class Laptop implements Serializable {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+    public void display() {
+        System.out.println("Laptop: ");
+        System.out.println("Id: " + getId());
+        System.out.println("name: " + getName());
+        System.out.println("Price: " + getPrice());
+        System.out.println("Brand: " + getBrand());
+
     }
 }

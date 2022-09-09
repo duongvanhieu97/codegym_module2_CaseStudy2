@@ -50,6 +50,15 @@ public class Products implements Serializable {
         this.brand = brand;
     }
 
+    public void display() {
+        System.out.println("Products: ");
+        System.out.println("Id: " + getId());
+        System.out.println("name: " + getName());
+        System.out.println("Price: " + getPrice());
+        System.out.println("Brand: " + getBrand());
+
+    }
+
     @Override
     public String toString() {
         return "Products{" +

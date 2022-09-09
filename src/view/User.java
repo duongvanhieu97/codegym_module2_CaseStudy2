@@ -8,6 +8,10 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static controller.user.ManageRegister.addUser;
+import static controller.user.ManageRegister.checkRegister;
+import static controller.user.ManageUser.checkLogin;
+
 public class User {
     public void loginSystem() {
         try {
@@ -51,10 +55,6 @@ public class User {
         registerList = RegisterFile.getInstance().readData();
     }
 
-    public void addRegister(Register register) {
-        registerList.add(register);
-        RegisterFile.getInstance().writeData(registerList);
-    }
     private void addToRegister(List<Register> registerList) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Mời bạn nhập thông tin đăng ký");
@@ -76,38 +76,20 @@ public class User {
         Scanner scanner4 = new Scanner(System.in);
         String address = scanner4.nextLine();
 
-
-        Register register= new Register(id, name, password, email, phone, address );
-        registerList.add(register);
-        RegisterFile.getInstance().writeData(registerList);
+        CheckUser(id,name,password,email,phone,address);
     }
 
-//    private void checkUser(int id, String name, String email, String phone, String address, String password) {
-//        if (checkRegister(name)) {
-//            System.out.println("Tài khoản đã tồn tại");
-//        } else if (ManageRegister.checkFile()) {
-//            writeUser(id, name, email, phone, address, password);
-//            System.out.println("Bạn đăng ký tài khoản thành công");
-//        }
-//        loginSystem();
+    private void CheckUser(int id, String name, String password, String email, String phone, String address) {
+        if (checkRegister(name)) {
+            System.out.println("Tài khoản đã tồn tại");
+        } else {
+            System.out.println("Bạn đăng ký tài khoản thành công");
+            addUser(new Register(id,name,password,email,phone,address));
+            System.out.println("Mời đang nhập hệ thống");
+        }
+        loginSystem();
 
-//    }
-//
-//
-//    private void writeUser(int id, String name, String email, String phone, String address, String password) {
-//        ManageRegister.setRegisterList(id, name, email, phone, address, password);
-//    }
-//
-//    private boolean checkRegister(String name) {
-//        for (Register register : ManageRegister.getRegisterList()) {
-//            boolean checkRegister = name.equals(register.getName());
-//            if (checkRegister) {
-//                return true;
-//            }
-//
-//        }
-//        return false;
-//    }
+    }
 
     private void login() {
         System.out.println("Nhập tên Đăng nhập");
@@ -120,7 +102,18 @@ public class User {
     }
 
     private void checkAccount(String name, String password) {
+        try {
+            if (checkLogin(name, password)) {
+                System.out.println("Đăng nhập thành công");
+//                Hiện thị ra menu categories
+            }
+        }catch (IndexOutOfBoundsException e) {
+            System.out.println("Đăng nhập thất bại");
+            loginSystem();
+        }
     }
+
+
 
 
 }

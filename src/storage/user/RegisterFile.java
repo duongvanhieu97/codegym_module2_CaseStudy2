@@ -8,9 +8,11 @@ import java.util.List;
 
 public class RegisterFile implements IReadRegisterFile {
     private static RegisterFile registerFile;
-    private RegisterFile() {
+
+    public RegisterFile() {
 
     }
+
     public static RegisterFile getInstance() {
         if (registerFile == null) {
             registerFile = new RegisterFile();
@@ -30,9 +32,7 @@ public class RegisterFile implements IReadRegisterFile {
             ois.close();
             fis.close();
             return registers;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;

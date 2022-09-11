@@ -4,11 +4,11 @@ import model.user.Register;
 import storage.user.RegisterFile;
 import view.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static controller.user.ManageRegister.addUser;
-import static controller.user.ManageRegister.checkRegister;
+import static controller.user.ManageRegister.*;
 import static controller.user.ManageUser.checkLogin;
 import static controller.user.ManageUser.userList;
 
@@ -24,6 +24,11 @@ public class User {
         }
 
     }
+    public static List<Register> registerList;
+
+    static {
+        registerList = RegisterFile.getInstance().readData();
+    }
 
     //    public static void main(String[] args) {
 //        List<Register> users ;
@@ -37,6 +42,9 @@ public class User {
     private void menuUser() {
         System.out.println("1: Đăng Nhập");
         System.out.println("2: Đăng Ký");
+        System.out.println("3: Sửa User");
+        System.out.println("4: Xóa User");
+        System.out.println("5: Hiển thị User");
         System.out.println("0: Thoát");
         System.out.println();
         System.out.println("Nhập lựa chọn của bạn");
@@ -49,20 +57,49 @@ public class User {
             case 2:
                 addToRegister(registerList);
                 break;
+            case 3:
+                editMenu();
+                break;
+            case 4:
+//                addToRegister(registerList);
+                break;
+            case 5:
+//                addToRegister(registerList);
+                break;
             case 0:
                 System.exit(0);
+                break;
             default:
                 System.out.println("Vui lòng bạn nhập lại");
         }
 
     }
 
-    public static List<Register> registerList;
+    private void editMenu() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập tên user cần sửa");
+        String name = scanner.nextLine();
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Nhập mật khẩu cần sửa");
+        String password = scanner1.nextLine();
 
-    static {
-        registerList = RegisterFile.getInstance().readData();
+        checkName(name, password);
     }
 
+    private void checkName(String name, String password) {
+        if (checkLogin(name,password)) {
+            System.out.println("Bạn nhập thông tin cần sửa");
+            editUser(name,password);
+        }else {
+            System.out.println("Bạn nhập không đúng tên với password đăng nhập");
+            editMenu();
+        }
+
+    }
+
+
+
+    // add sản phẩm
     private void addToRegister(List<Register> registerList) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Mời bạn nhập thông tin đăng ký");

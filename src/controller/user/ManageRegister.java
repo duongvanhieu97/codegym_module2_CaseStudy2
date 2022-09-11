@@ -22,6 +22,7 @@ public class ManageRegister {
 
     //   Sửa user
     public static void editUser(String name, String password) {
+        registerList = readWriteData.readData();
         for (User u : registerList) {
             if (name.equals(name)) {
                 u.setName(name);
@@ -33,6 +34,7 @@ public class ManageRegister {
 
     // xóa User
     public static void deleteUser(String name) {
+        registerList = readWriteData.readData();
         for (int i = 0; i < registerList.size(); i++) {
             if (registerList.get(i).getName().equals(name)) {
                 registerList.remove(i);

@@ -61,7 +61,7 @@ public class User {
                 editMenu();
                 break;
             case 4:
-//                addToRegister(registerList);
+                deleteMenu();
                 break;
             case 5:
 //                addToRegister(registerList);
@@ -74,7 +74,15 @@ public class User {
         }
 
     }
+//Xóa user
+    private void deleteMenu() {
+        Scanner scanner =new Scanner(System.in);
+        System.out.println("Nhập Tên cần xóa");
+        String name = scanner.nextLine();
+        deleteUser(name);
 
+    }
+//Sửa user
     private void editMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập tên user cần sửa");

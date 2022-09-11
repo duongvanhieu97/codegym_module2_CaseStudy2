@@ -115,7 +115,7 @@ public class User {
         try {
             if (checkLogin(name, password)) {
                 System.out.println("Đăng nhập thành công");
-                //   Hiện thị ra menu categories
+                //                Hiện thị ra menu categories
 
                 product.menuCategories();
             } else {

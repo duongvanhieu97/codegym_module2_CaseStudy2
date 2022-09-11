@@ -11,11 +11,10 @@ public class Laptop implements Serializable,InterfaceProducts {
     public Laptop() {
     }
 
-    public Laptop(int id, String name, double price, String brand) {
+    public Laptop(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.brand = brand;
     }
 
     public int getId() {
@@ -42,19 +41,11 @@ public class Laptop implements Serializable,InterfaceProducts {
         this.price = price;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
     public void display() {
         System.out.println("Laptop: ");
         System.out.println("Id: " + getId());
         System.out.println("name: " + getName());
         System.out.println("Price: " + getPrice());
-        System.out.println("Brand: " + getBrand());
 
     }
 }

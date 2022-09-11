@@ -6,16 +6,14 @@ public class Products implements Serializable {
     int id;
     String name;
     double price;
-    String brand;
 
     public Products() {
     }
 
-    public Products(int id, String name, double price, String brand) {
+    public Products(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.brand = brand;
     }
 
     public int getId() {
@@ -42,20 +40,11 @@ public class Products implements Serializable {
         this.price = price;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public void display() {
         System.out.println("Products: ");
         System.out.println("Id: " + getId());
         System.out.println("name: " + getName());
         System.out.println("Price: " + getPrice());
-        System.out.println("Brand: " + getBrand());
 
     }
 
@@ -65,7 +54,6 @@ public class Products implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", brand='" + brand + '\'' +
                 '}';
     }
 }

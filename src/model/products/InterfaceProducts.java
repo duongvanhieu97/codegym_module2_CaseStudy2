@@ -9,10 +9,6 @@ public interface InterfaceProducts {
 
     void setName(String name);
 
-    String getBrand();
-
-    void setBrand(String brand);
-
     double getPrice();
 
     void setPrice(double price);

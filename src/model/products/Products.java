@@ -7,7 +7,7 @@ public class Products implements Serializable {
     String name;
     double price;
 
-    public Products() {
+    public Products(int id, String name, String price) {
     }
 
     public Products(int id, String name, double price) {

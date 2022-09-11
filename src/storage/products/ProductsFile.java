@@ -1,49 +1,45 @@
-package storage.user;
-
+package storage.products;
+import model.products.Products;
 import model.user.Register;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterFile implements IReadRegisterFile {
-    private static RegisterFile registerFile;
+public class ProductsFile implements IReadWriteData {
 
-    public RegisterFile() {
+    private static ProductsFile instance=null;
 
+    private ProductsFile() {
     }
 
-    public static RegisterFile getInstance() {
-        if (registerFile == null) {
-            registerFile = new RegisterFile();
-        }
-        return registerFile;
+    public static ProductsFile getInstance(){
+        if (instance == null) instance = new ProductsFile();
+        return instance;
     }
 
-
-    @Override
-    public List<Register> readData() {
-        List<Register> registerList = new ArrayList<>();
+    public List<Products> readData() {
+        List<Products> registerList = new ArrayList<>();
         try {
-            FileInputStream fis = new FileInputStream("data/register.txt");
+            FileInputStream fis = new FileInputStream("data/products.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object obj = ois.readObject();
-            List<Register> registers = (List<Register>) obj;
+            List<Products> products = (List<Products>) obj;
             ois.close();
             fis.close();
-            return registers;
+            return products;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    @Override
-    public void writeData(List<Register> list) {
+
+    public void writeData(List<Products> Products) {
         try {
-            FileOutputStream fos = new FileOutputStream("data/register.txt");
+            FileOutputStream fos = new FileOutputStream("data/products.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(list);
+            oos.writeObject(Products);
             oos.close();
             fos.close();
         } catch (IOException e) {
@@ -52,22 +48,22 @@ public class RegisterFile implements IReadRegisterFile {
     }
 
     @Override
-    public List<Register> readData(String path) {
-        List<Register> list = new ArrayList<>();
+    public List<Products> readData(String path) {
+        List<Products> products = new ArrayList<>();
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object obj = ois.readObject();
-            list = (List<Register>) obj;
-            return list;
+            products = (List<Products>) obj;
+            return products;
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void writeData(List<Register> list, String path) {
+    public void writeData(List<Products> list, String path) {
         try {
             FileOutputStream fos = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -80,5 +76,4 @@ public class RegisterFile implements IReadRegisterFile {
             e.printStackTrace();
         }
     }
-
 }

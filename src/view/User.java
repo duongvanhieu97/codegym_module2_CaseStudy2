@@ -90,15 +90,6 @@ public class User {
         editUser(name, password);
     }
 
-    private void checkName(String name, String password) {
-        if (checkLogin(name, password)) {
-            editUser(name, password);
-        }
-
-    }
-
-
-
     // add sản phẩm
     private void addToRegister(List<Register> registerList) {
         Scanner scanner = new Scanner(System.in);

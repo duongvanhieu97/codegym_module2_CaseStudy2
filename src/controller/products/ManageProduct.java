@@ -5,6 +5,9 @@ import storage.products.ProductsFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import static view.User.editMenu;
 
 
 public class ManageProduct {
@@ -20,9 +23,18 @@ public class ManageProduct {
     public static void editProducts(int id, String name, double price) {
         listProducts = readFile.readData();
         for (Products p : listProducts) {
-            if (p.getId() == id) {
-                p.setName(name);
-                p.setPrice(price);
+            if (checkIDProduct(id)) {
+                System.out.println("Bạn nhập thông tin cần sửa");
+                Scanner scanner = new Scanner(System.in);
+                String newName = scanner.nextLine();
+                p.setName(newName);
+                Scanner scanner1 = new Scanner(System.in);
+                double newPrice = scanner1.nextDouble();
+                p.setPrice(newPrice);
+                readFile.writeData(listProducts);
+            }else {
+                System.out.println("Bạn nhập không đúng id vui lòng nhập lại");
+                editMenu();
             }
         }
     }

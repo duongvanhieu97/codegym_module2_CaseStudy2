@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static controller.products.ManageProduct.addProduct;
-import static controller.products.ManageProduct.checkIDProduct;
+import static controller.products.ManageProduct.*;
 
 public class Product {
     public void menuCategories() {
@@ -68,12 +67,16 @@ public class Product {
                 break;
 
             case 2:
+                editMenuProduct();
                 break;
 
             case 3:
+                deleteMenuProduct();
+
                 break;
 
             case 4:
+                displayList();
                 break;
 
             case 0:
@@ -84,6 +87,27 @@ public class Product {
                 menuProducts();
         }
     }
+
+    private void editMenuProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập id cần sửa");
+        int id = scanner.nextInt();
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Nhập name cần sửa");
+        String name = scanner1.nextLine();
+        Scanner scanner2 = new Scanner(System.in);
+        System.out.println("Nhập price cần sửa");
+        double price = scanner2.nextDouble();
+        editProducts(id,name,price);
+    }
+
+    private void deleteMenuProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập id cần xóa");
+        int id = scanner.nextInt();
+        deleteProducts(id);
+    }
+
     private void addToProduct(List<Products> list) {
         System.out.println("Nhập Id Product");
         Scanner scanner = new Scanner(System.in);

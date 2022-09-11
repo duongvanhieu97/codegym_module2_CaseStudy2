@@ -24,20 +24,14 @@ public class User {
         }
 
     }
+
     public static List<Register> registerList;
 
     static {
         registerList = RegisterFile.getInstance().readData();
     }
 
-    //    public static void main(String[] args) {
-//        List<Register> users ;
-//        users =  RegisterFile.getInstance().readData();
-//        for (Register register: users
-//             ) {
-//            System.out.println(register);
-//        }
-//    }
+
     //    menu User
     private void menuUser() {
         System.out.println("1: Đăng Nhập");
@@ -64,7 +58,7 @@ public class User {
                 deleteMenu();
                 break;
             case 5:
-//                addToRegister(registerList);
+                displayList();
                 break;
             case 0:
                 System.exit(0);
@@ -74,16 +68,18 @@ public class User {
         }
 
     }
-//Xóa user
+
+    //Xóa user
     private void deleteMenu() {
-        Scanner scanner =new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập Tên cần xóa");
         String name = scanner.nextLine();
         deleteUser(name);
 
     }
-//Sửa user
-    private void editMenu() {
+
+    //Sửa user
+    public static void editMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập tên user cần sửa");
         String name = scanner.nextLine();
@@ -91,16 +87,12 @@ public class User {
         System.out.println("Nhập mật khẩu cần sửa");
         String password = scanner1.nextLine();
 
-        checkName(name, password);
+        editUser(name, password);
     }
 
     private void checkName(String name, String password) {
-        if (checkLogin(name,password)) {
-            System.out.println("Bạn nhập thông tin cần sửa");
-            editUser(name,password);
-        }else {
-            System.out.println("Bạn nhập không đúng tên với password đăng nhập");
-            editMenu();
+        if (checkLogin(name, password)) {
+            editUser(name, password);
         }
 
     }

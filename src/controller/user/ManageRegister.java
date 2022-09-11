@@ -6,6 +6,10 @@ import storage.user.RegisterFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import static controller.user.ManageUser.checkLogin;
+import static view.User.*;
 
 public class ManageRegister {
     private static RegisterFile readWriteData = RegisterFile.getInstance();
@@ -24,10 +28,16 @@ public class ManageRegister {
     public static void editUser(String name, String password) {
         registerList = readWriteData.readData();
         for (User u : registerList) {
-            if (name.equals(name)) {
-                u.setName(name);
-                u.setPassword(password);
+            if (checkLogin(name,password)) {
+                System.out.println("Bạn nhập thông tin cần sửa");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Nhập mật khẩu mới ");
+                String newPassword = scanner.nextLine();
+                u.setPassword(newPassword);
                 RegisterFile.getInstance().writeData(registerList);
+            }else {
+                System.out.println("Bạn nhập không đúng tên với password đăng nhập");
+                editMenu();
             }
         }
     }
@@ -46,10 +56,11 @@ public class ManageRegister {
 
     //    Hiển thị danh sách user
     public static void displayList() {
-        for (User u : userList) {
-            System.out.println(u.toString());
-            RegisterFile.getInstance().writeData(registerList);
-
+        List<Register> users;
+        users = RegisterFile.getInstance().readData();
+        for (Register register : users
+        ) {
+            System.out.println(register);
         }
     }
 
